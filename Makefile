@@ -1,7 +1,7 @@
 GO_VERSION=1.17
 
 ALL_GO_FILES=$(shell find . -type f  -name '*.go')
-ALL_PROTO_FILES=$(shell find ./proto/netbookdevs -type f  -name '*.proto')
+ALL_PROTO_FILES=$(shell find ./proto/netbookai -type f  -name '*.proto')
 CI_COMMIT_SHORT_SHA ?= "local"
 TAG ?= $(CI_COMMIT_SHORT_SHA)
 

@@ -295,6 +295,16 @@ func (s *spawnerService) WriteCredential(ctx context.Context, req *proto.WriteCr
 				Name:           account,
 			}
 		}
+	case constants.GcpLabel:
+		cred_type = "GcpCredential"
+		if c := req.GetGcpCred(); c != nil {
+
+			cred = &system.GCPCredential{
+				Name:        account,
+				ProjectId:   c.GetProjectID(),
+				Certificate: c.GetCertificate(),
+			}
+		}
 	default:
 		return nil, fmt.Errorf("invalid provider '%s'", provider)
 	}
@@ -349,6 +359,14 @@ func (s *spawnerService) ReadCredential(ctx context.Context, req *proto.ReadCred
 				ClientID:       c.ClientID,
 				ClientSecret:   c.ClientSecret,
 				ResourceGroup:  c.ResourceGroup,
+			},
+		}
+	case constants.GcpLabel:
+		c := creds.GetGcp()
+		p.Cred = &proto.ReadCredentialResponse_GcpCred{
+			GcpCred: &proto.GcpCredentials{
+				ProjectID:   c.ProjectId,
+				Certificate: c.Certificate,
 			},
 		}
 	}

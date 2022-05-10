@@ -14,12 +14,12 @@ import (
 )
 
 const (
-	clusterName = "cluster-node-with-machinenode"
-	region      = "us-east-2" //"eastus2" //"us-west-2"
-	provider    = "aws"
+	clusterName = "gcp-cluster-test-1"
+	region      = "us-central1" //"eastus2" //"us-west-2"
+	provider    = "gcp"
 	accountName = "netbook-aws"
-	nodeName    = "rootnode"
-	instance    = "Standard_A2_v2"
+	nodeName    = "rootnode-gcp"
+	instance    = "e2-medium"
 	volumeName  = "vol-20-20220404123522"
 )
 

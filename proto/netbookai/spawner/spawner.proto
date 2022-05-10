@@ -256,7 +256,7 @@ message CreateVolumeRequest {
   int64 size = 6;
   string snapshotid = 7;
   map<string, string> labels = 8;
-  string snapshotUri= 9;
+  string snapshotUri = 9;
   bool deleteSnapshot = 10;
 }
 
@@ -357,12 +357,18 @@ message AzureCredentials {
   string resourceGroup = 5;
 }
 
+message GcpCredentials {
+  string projectID = 1;
+  string certificate = 2;
+}
+
 message WriteCredentialRequest {
   string account = 1;
   string provider = 2;
   oneof cred {
     AwsCredentials awsCred = 3;
     AzureCredentials azureCred = 4;
+    GcpCredentials gcpCred = 5;
   }
 }
 
@@ -381,6 +387,7 @@ message ReadCredentialResponse {
   oneof cred {
     AwsCredentials awsCred = 3;
     AzureCredentials azureCred = 4;
+    GcpCredentials gcpCred = 5;
   }
 }
 

@@ -45,6 +45,10 @@ type Config struct {
 	AzureClientID       string `mapstructure:"AZURE_CLIENT_ID"`
 	AzureClientSecret   string `mapstructure:"AZURE_CLIENT_SECRET"`
 	AzureResourceGroup  string `mapstructure:"AZURE_RESOURCE_GROUP"`
+
+	// GCP dev credential config
+	GcpProject     string `mapstructure:"GCP_PROJECT"`
+	GcpCertificate string `mapstructure:"GCP_CERTIFICATE"`
 }
 
 // Load reads configuration from file or environment variables.
