@@ -10,6 +10,7 @@ import (
 	aws "gitlab.com/netbook-devs/spawner-service/pkg/service/aws"
 	"gitlab.com/netbook-devs/spawner-service/pkg/service/azure"
 	"gitlab.com/netbook-devs/spawner-service/pkg/service/constants"
+	"gitlab.com/netbook-devs/spawner-service/pkg/service/gcp"
 	"gitlab.com/netbook-devs/spawner-service/pkg/service/rancher"
 	"gitlab.com/netbook-devs/spawner-service/pkg/service/system"
 
@@ -47,6 +48,7 @@ type SpawnerService interface {
 type spawnerService struct {
 	awsController   Controller
 	azureController Controller
+	gcpController   Controller
 	logger          *zap.SugaredLogger
 
 	proto.UnimplementedSpawnerServiceServer
@@ -58,6 +60,7 @@ func New(logger *zap.SugaredLogger) SpawnerService {
 	svc := &spawnerService{
 		awsController:   aws.NewAWSController(logger),
 		azureController: azure.NewController(logger),
+		gcpController:   gcp.NewController(logger),
 		logger:          logger,
 	}
 	return svc
@@ -69,6 +72,8 @@ func (s *spawnerService) controller(provider string) (Controller, error) {
 		return s.awsController, nil
 	case "azure":
 		return s.azureController, nil
+	case "gcp":
+		return s.gcpController, nil
 	}
 	return nil, fmt.Errorf(ProviderNotFound, provider)
 }
